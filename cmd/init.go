@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"os/user"
@@ -20,9 +21,17 @@ func Run() {
 		os.Exit(1)
 	}
 
-	query := strings.Join(os.Args[1:], " ")
-	fmt.Printf("Searching for '%s'\n", query)
+	var idSearchString string
+	flag.StringVar(&idSearchString, "s", "", "search for a specific id")
+	flag.Parse()
 
-	result := pkg.Search(query, config)
-	pkg.DumpTable(result)
+	if idSearchString == "" {
+		query := strings.Join(os.Args[1:], " ")
+		fmt.Printf("Searching for '%s'\n", query)
+
+		result := pkg.Search(query, config)
+		pkg.DumpTable(result)
+	} else {
+		fmt.Print("Searching by id not yet supported")
+	}
 }

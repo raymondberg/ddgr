@@ -5,8 +5,10 @@ type SearchResult struct {
 }
 
 type SearchResultRow struct {
+	Id         string           `json:"id"`
 	Attributes SearchAttributes `json:"attributes"`
 }
+
 type SearchAttributes struct {
 	Timestamp string   `json:"timestamp"`
 	Service   string   `json:"service"`
